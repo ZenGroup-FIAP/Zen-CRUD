@@ -24,9 +24,14 @@ public class ConnectionOracle {
 		}
 	}
 	
-	public ConnectionOracle getConnection() {
+	public static ConnectionOracle getInstance() {
 		return instance;
 	}
+	
+	public Connection getConnection() {
+		return connection;
+	}
+	
 	
 	public void closeConnection() {
 		try {
