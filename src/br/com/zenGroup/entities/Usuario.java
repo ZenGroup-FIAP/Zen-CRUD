@@ -1,6 +1,6 @@
 package br.com.zenGroup.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 abstract public class Usuario {
 	private Integer codigo;

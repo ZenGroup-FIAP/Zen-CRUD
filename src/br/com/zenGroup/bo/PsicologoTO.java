@@ -1,6 +1,6 @@
 package br.com.zenGroup.bo;
 
-import java.util.Date;
+import java.sql.Date;
 
 import br.com.zenGroup.entities.Usuario;
 import br.com.zenGroup.enums.Disponibilidade;
