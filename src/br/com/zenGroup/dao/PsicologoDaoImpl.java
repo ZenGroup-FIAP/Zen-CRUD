@@ -54,6 +54,13 @@ public class PsicologoDaoImpl implements PsicologoDao {
 			psicologo.setSenha(rs.getString("DS_SENHA"));
 			psicologo.setVlHora(rs.getDouble("VL_HORA"));
 			psicologo.setRanking(rs.getInt("NR_RANKING"));
+			psicologo.setBio(rs.getString("TX_DESC_PERFIL"));
+			psicologo.setTelefone(rs.getString("NR_TELEFONE"));
+			psicologo.setCpf(rs.getString("NR_CPF"));
+			psicologo.setNascimento(rs.getDate("DT_NASCIMENTO"));
+			psicologo.setRating(rs.getDouble("NR_RATING"));
+			psicologo.setDisponibilidade(Disponibilidade.valueOf(rs.getString("DS_DISPONIBILIDADE")));
+			psicologo.setConsultas(rs.getInt("NR_CONSULTAS"));
 			
 			lista.add(psicologo);
 		}
