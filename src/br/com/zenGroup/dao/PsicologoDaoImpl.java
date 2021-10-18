@@ -71,31 +71,69 @@ public class PsicologoDaoImpl implements PsicologoDao {
 
 	@Override
 	public List<PsicologoTO> select(Double rating, Disponibilidade disponibilidade, Integer consultas) throws SQLException {
-		// TODO Auto-generated method stub
+		conn = ConnectionOracle.getInstance();
+		List<PsicologoTO> lista = new ArrayList<>();
+		String sql = "SELECT * FROM T_ZSO_PSICOLOGOWHERE CD_PSICOLOGO WHERE NR_RATING =" + rating + "AND DS_DISPONIBILIDADE =" + disponibilidade + "AND NS_CONSULTAS" + consultas;
+		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()){
+			PsicologoTO psicologo = new PsicologoTO();
+			psicologo.setCodigo(rs.getInt("CD_PSICOLOGO"));
+			psicologo.setNome(rs.getString("NM_PSICOLOGO"));
+			psicologo.setEmail(rs.getString("DS_EMAIL"));
+			psicologo.setSenha(rs.getString("DS_SENHA"));
+			psicologo.setVlHora(rs.getDouble("VL_HORA"));
+			psicologo.setRanking(rs.getInt("NR_RANKING"));
+			psicologo.setBio(rs.getString("TX_DESC_PERFIL"));
+			psicologo.setTelefone(rs.getString("NR_TELEFONE"));
+			psicologo.setCpf(rs.getString("NR_CPF"));
+			psicologo.setNascimento(rs.getDate("DT_NASCIMENTO"));
+			psicologo.setRating(rs.getDouble("NR_RATING"));
+			psicologo.setDisponibilidade(Disponibilidade.valueOf(rs.getString("DS_DISPONIBILIDADE")));
+			psicologo.setConsultas(rs.getInt("NR_CONSULTAS"));
+			
+		}
 		return null;
 	}
 
 	@Override
 	public PsicologoTO select(Integer codigo) throws SQLException {
-		// TODO Auto-generated method stub
+		List<PsicologoTO> lista = new ArrayList<>();
+		String sql = "SELECT * FROM T_ZSO_PSICOLOGO WHERE CD_PSICOLOGO =" + codigo;
+		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) {
+			
+
+		}
 		return null;
 	}
 
 	@Override
 	public PsicologoTO select(String email, String senha) throws SQLException {
-		// TODO Auto-generated method stub
+		List<PsicologoTO> lista = new ArrayList<>();
+		String sql = "SELECT * FROM T_ZSO_PSICOLOGO";
+		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
 		return null;
 	}
 
 	@Override
 	public void update(Integer codigo) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		List<PsicologoTO> lista = new ArrayList<>();
+		String sql = "SELECT * FROM T_ZSO_PSICOLOGO";
+		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
 	}
 
 	@Override
 	public void delete(Integer codigo) throws SQLException {
-		// TODO Auto-generated method stub
+		List<PsicologoTO> lista = new ArrayList<>();
+		String sql = "SELECT * FROM T_ZSO_PSICOLOGO WHERE CD_";
+		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
 		
 	}
 
