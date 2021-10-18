@@ -116,9 +116,9 @@ public class PacienteDaoImpl implements PacienteDao {
 	}
 
 	@Override
-	public void update(Integer codigo, PacienteTO paciente) throws SQLException {
+	public void update(PacienteTO paciente) throws SQLException {
 		conn = ConnectionOracle.getInstance();
-		String sql = "UPDATE T_ZSO_PACIENTE SET NM_PACIENTE=?, DS_EMAIL=?, DS_SENHA=?, NR_TELEFONE=?, NR_CPF=?, DT_NASCIMENTO=?";
+		String sql = "UPDATE T_ZSO_PACIENTE SET NM_PACIENTE=?, DS_EMAIL=?, DS_SENHA=?, NR_TELEFONE=?, NR_CPF=?, DT_NASCIMENTO=? WHERE CD_PACIENTE = " + paciente.getCodigo();
 		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
 		
 		ps.setString(1, paciente.getNome());
