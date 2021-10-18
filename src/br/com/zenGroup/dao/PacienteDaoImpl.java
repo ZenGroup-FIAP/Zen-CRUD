@@ -1,7 +1,9 @@
 package br.com.zenGroup.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.zenGroup.to.PacienteTO;
@@ -32,8 +34,31 @@ public class PacienteDaoImpl implements PacienteDao {
 
 	@Override
 	public List<PacienteTO> select() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		conn = ConnectionOracle.getInstance();
+		List<PacienteTO> lista = new ArrayList<>();
+		String sql = "SELECT * FROM T_ZSO_PACIENTE";
+		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) {
+			PacienteTO paciente = new PacienteTO();
+			paciente.setCodigo(rs.getInt("CD_PACIENTE"));
+			paciente.setNome(rs.getString("NM_PACIENTE"));
+			paciente.setEmail(rs.getString("DS_EMAIL"));
+			paciente.setSenha(rs.getString("DS_SENHA"));
+			paciente.setTelefone(rs.getString("NR_TELEFONE"));
+			paciente.setCpf(rs.getString("NR_CPF"));
+			paciente.setNascimento(rs.getDate("DT_NASCIMENTO"));
+			
+			lista.add(paciente);
+		}
+		
+		rs.close();
+		ps.close();
+		conn.closeConnection();
+		
+		
+		return lista;
 	}
 
 	@Override

@@ -65,6 +65,9 @@ public class PsicologoDaoImpl implements PsicologoDao {
 			lista.add(psicologo);
 		}
 		
+		rs.close();
+		ps.close();
+		conn.closeConnection();
 		
 		return lista;
 	}
