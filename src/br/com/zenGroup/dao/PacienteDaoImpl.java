@@ -116,14 +116,18 @@ public class PacienteDaoImpl implements PacienteDao {
 	}
 
 	@Override
-	public void update(Integer codigo) throws SQLException {
+	public void update(Integer codigo, PacienteTO paciente) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(Integer codigo) throws SQLException {
-		// TODO Auto-generated method stub
+		conn = ConnectionOracle.getInstance();
+		String sql = "DELETE FROM T_ZSO_PACIENTE WHERE CD_PACIENTE = " + codigo;
+		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+		
+		ps.execute();
 		
 	}
 }

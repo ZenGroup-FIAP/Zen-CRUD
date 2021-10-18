@@ -14,7 +14,7 @@ public interface PacienteDao {
 	
 	public PacienteTO select(String email, String senha) throws SQLException;
 	
-	public void update(Integer codigo) throws SQLException;
+	public void update(Integer codigo, PacienteTO paciente) throws SQLException;
 	
 	public void delete(Integer codigo) throws SQLException;
 }
