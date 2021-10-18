@@ -63,14 +63,56 @@ public class PacienteDaoImpl implements PacienteDao {
 
 	@Override
 	public PacienteTO select(Integer codigo) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		conn = ConnectionOracle.getInstance();
+		PacienteTO paciente = new PacienteTO();
+		String sql = "SELECT * FROM T_ZSO_PACIENTE WHERE CD_PACIENTE = " + codigo;
+		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		if (rs.next()) {
+			paciente.setCodigo(rs.getInt("CD_PACIENTE"));
+			paciente.setNome(rs.getString("NM_PACIENTE"));
+			paciente.setEmail(rs.getString("DS_EMAIL"));
+			paciente.setSenha(rs.getString("DS_SENHA"));
+			paciente.setTelefone(rs.getString("NR_TELEFONE"));
+			paciente.setCpf(rs.getString("NR_CPF"));
+			paciente.setNascimento(rs.getDate("DT_NASCIMENTO"));
+		} else {
+			paciente = null;
+		}
+		
+		rs.close();
+		ps.close();
+		conn.closeConnection();
+		
+		return paciente;
 	}
 
 	@Override
 	public PacienteTO select(String email, String senha) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		conn = ConnectionOracle.getInstance();
+		PacienteTO paciente = new PacienteTO();
+		String sql = "SELECT * FROM T_ZSO_PACIENTE WHERE DS_EMAIL = " + email + " AND DS_SENHA = " + senha;
+		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		if (rs.next()) {
+			paciente.setCodigo(rs.getInt("CD_PACIENTE"));
+			paciente.setNome(rs.getString("NM_PACIENTE"));
+			paciente.setEmail(rs.getString("DS_EMAIL"));
+			paciente.setSenha(rs.getString("DS_SENHA"));
+			paciente.setTelefone(rs.getString("NR_TELEFONE"));
+			paciente.setCpf(rs.getString("NR_CPF"));
+			paciente.setNascimento(rs.getDate("DT_NASCIMENTO"));
+		} else {
+			paciente = null;
+		}
+		
+		rs.close();
+		ps.close();
+		conn.closeConnection();
+		
+		return paciente;
 	}
 
 	@Override
