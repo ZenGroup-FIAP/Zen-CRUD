@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.zenGroup.bo.PsicologoTO;
 import br.com.zenGroup.enums.Disponibilidade;
+import br.com.zenGroup.to.PsicologoTO;
 import br.com.zenGroup.tools.ConnectionOracle;
 
 public class PsicologoDaoImpl implements PsicologoDao {

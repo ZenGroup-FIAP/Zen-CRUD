@@ -1,35 +1,22 @@
 package application;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import br.com.zenGroup.tools.ConnectionOracle;
+import br.com.zenGroup.to.PacienteTO;
 
 public class Program {
 	public static void main(String[] args) throws SQLException {
-		// Testando conexão com banco de dados fazendo um select
-		ConnectionOracle conn = ConnectionOracle.getInstance();
+		PacienteTO paciente = new PacienteTO();
+		paciente.setCodigo(1);
+		paciente.setCpf("510.605.523-88");
+		paciente.setEmail("sla@email.com");
+		paciente.setNascimento(new Date(0));
+		paciente.setNome("Jorge");
+		paciente.setSenha("1234");
+		paciente.setTelefone("119565659");
 		
-		String sql = "SELECT * FROM T_ZSO_PSICOLOGO";
-		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
 		
-		List<String> nomes = new ArrayList<>();
-		
-		while (rs.next()) {
-			nomes.add(rs.getString("NM_PSICOLOGO"));
-		}
-		
-		ps.execute();
-		
-		rs.close();
-		ps.close();
-		
-		nomes.forEach(e -> System.out.println(e));
-		
-		conn.closeConnection();
+		System.out.println(paciente);
 	}
 }

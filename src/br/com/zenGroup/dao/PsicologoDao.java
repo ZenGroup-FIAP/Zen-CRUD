@@ -3,8 +3,8 @@ package br.com.zenGroup.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.com.zenGroup.bo.PsicologoTO;
 import br.com.zenGroup.enums.Disponibilidade;
+import br.com.zenGroup.to.PsicologoTO;
 
 public interface PsicologoDao {
 	public void insert(PsicologoTO psicologo) throws SQLException;
