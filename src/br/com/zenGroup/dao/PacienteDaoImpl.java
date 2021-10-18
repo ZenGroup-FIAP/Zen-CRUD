@@ -117,17 +117,32 @@ public class PacienteDaoImpl implements PacienteDao {
 
 	@Override
 	public void update(Integer codigo, PacienteTO paciente) throws SQLException {
-		// TODO Auto-generated method stub
+		conn = ConnectionOracle.getInstance();
+		String sql = "UPDATE T_ZSO_PACIENTE SET NM_PACIENTE=?, DS_EMAIL=?, DS_SENHA=?, NR_TELEFONE=?, NR_CPF=?, DT_NASCIMENTO=?";
+		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+		
+		ps.setString(1, paciente.getNome());
+		ps.setString(2, paciente.getEmail());
+		ps.setString(3, paciente.getSenha());
+		ps.setString(4, paciente.getTelefone());
+		ps.setString(5, paciente.getCpf());
+		ps.setDate(6, paciente.getNascimento());
+		
+		ps.execute();
+		
+		ps.close();
+		conn.closeConnection();
 		
 	}
 
 	@Override
 	public void delete(Integer codigo) throws SQLException {
 		conn = ConnectionOracle.getInstance();
-		String sql = "DELETE FROM T_ZSO_PACIENTE WHERE CD_PACIENTE = " + codigo;
+		String sql = "DELETE FROM T_ZSO_PACIENTE WHERE CD_CONSULTA = " + codigo + ";DELETE FROM T_ZSO_AGENDAMENTO WHERE CD_PACIENTE = " + codigo + ";DELETE FROM T_ZSO_PACIENTE WHERE CD_PACIENTE = " + codigo;
 		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
 		
 		ps.execute();
-		
+		ps.close();
+		conn.closeConnection();
 	}
 }
