@@ -209,7 +209,7 @@ public class PsicologoDaoImpl implements PsicologoDao {
 	@Override
 	public void delete(Integer codigo) throws SQLException {
 		conn = ConnectionOracle.getInstance();
-		String sql = "DELETE FROM T_ZSO_CONSULTA WHERE CD_PSICOLOGO = " + codigo + ";DELETE FROM T_ZSO_AGENDAMENTO WHERE CD_PSICOLOGO = " + codigo + ";DELETE FROM T_ZSO_PSICOLOGO WHERE CD_PSICOLOGO = " + codigo;
+		String sql = "DELETE FROM T_ZSO_CONSULTA WHERE CD_PSICOLOGO = " + codigo + ";DELETE FROM T_ZSO_AGENDAMENTO WHERE CD_PSICOLOGO = " + codigo + ";DELETE FROM T_ZSO_PSICOLOGO WHERE CD_PSICOLOGO = " + codigo +";";
 		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
 		
 		ps.execute();
