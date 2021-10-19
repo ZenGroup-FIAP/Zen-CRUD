@@ -13,5 +13,6 @@ public class Program {
 		System.out.println(bo.listar());
 		
 		// Cadastrar paciente
+		
 	}
 }
