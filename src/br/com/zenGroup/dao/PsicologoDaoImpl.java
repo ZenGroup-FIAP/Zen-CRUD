@@ -69,11 +69,12 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		return lista;
 	}
 
+	
 	@Override
 	public List<PsicologoTO> select(Double rating, Disponibilidade disponibilidade, Integer consultas) throws SQLException {
 		conn = ConnectionOracle.getInstance();
 		List<PsicologoTO> lista = new ArrayList<>();
-		String sql = "SELECT * FROM T_ZSO_PSICOLOGOWHERE CD_PSICOLOGO WHERE NR_RATING =" + rating + "AND DS_DISPONIBILIDADE =" + disponibilidade + "AND NS_CONSULTAS" + consultas;
+		String sql = "SELECT * FROM T_ZSO_PSICOLOGO WHERE NR_RATING =" + rating + "AND DS_DISPONIBILIDADE =" + disponibilidade + "AND NR_CONSULTAS =" + consultas;
 		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
@@ -91,49 +92,132 @@ public class PsicologoDaoImpl implements PsicologoDao {
 			psicologo.setNascimento(rs.getDate("DT_NASCIMENTO"));
 			psicologo.setRating(rs.getDouble("NR_RATING"));
 			psicologo.setDisponibilidade(Disponibilidade.valueOf(rs.getString("DS_DISPONIBILIDADE")));
-			psicologo.setConsultas(rs.getInt("NR_CONSULTAS"));
-			
+			psicologo.setConsultas(rs.getInt("NR_CONSULTAS"));		
+			 
+			lista.add(psicologo);
 		}
-		return null;
+		
+		rs.close();
+		ps.close();
+		conn.closeConnection();
+		
+		return lista;
 	}
 
 	@Override
 	public PsicologoTO select(Integer codigo) throws SQLException {
-		List<PsicologoTO> lista = new ArrayList<>();
-		String sql = "SELECT * FROM T_ZSO_PSICOLOGO WHERE CD_PSICOLOGO =" + codigo;
+		conn = ConnectionOracle.getInstance();
+		PsicologoTO psicologo = new PsicologoTO();
+		String sql = "SELECT * FROM T_ZSO_PACIENTE WHERE CD_PSICOLOGO = " + codigo;
 		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
-		while (rs.next()) {
+		if (rs.next()) {
+			psicologo.setCodigo(rs.getInt("CD_PSICOLOGO"));
+			psicologo.setNome(rs.getString("NM_PSICOLOGO"));
+			psicologo.setEmail(rs.getString("DS_EMAIL"));
+			psicologo.setSenha(rs.getString("DS_SENHA"));
+			psicologo.setVlHora(rs.getDouble("VL_HORA"));
+			psicologo.setRanking(rs.getInt("NR_RANKING"));
+			psicologo.setBio(rs.getString("TX_DESC_PERFIL"));
+			psicologo.setTelefone(rs.getString("NR_TELEFONE"));
+			psicologo.setCpf(rs.getString("NR_CPF"));
+			psicologo.setNascimento(rs.getDate("DT_NASCIMENTO"));
+			psicologo.setRating(rs.getDouble("NR_RATING"));
+			psicologo.setDisponibilidade(Disponibilidade.valueOf(rs.getString("DS_DISPONIBILIDADE")));
+			psicologo.setConsultas(rs.getInt("NR_CONSULTAS"));	
 			
-
+		}else {
+			psicologo =null;
 		}
-		return null;
+		
+		rs.close();
+		ps.close();
+		conn.closeConnection();
+		
+		return psicologo;
+		
 	}
 
 	@Override
 	public PsicologoTO select(String email, String senha) throws SQLException {
-		List<PsicologoTO> lista = new ArrayList<>();
-		String sql = "SELECT * FROM T_ZSO_PSICOLOGO";
+		conn = ConnectionOracle.getInstance();
+		PsicologoTO psicologo = new PsicologoTO();
+		String sql = "SELECT * FROM T_ZSO_PACIENTE WHERE DS_EMAIL = " + email + " AND DS_SENHA = " + senha;
 		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		return null;
+		
+		if (rs.next()) {
+			psicologo.setCodigo(rs.getInt("CD_PSICOLOGO"));
+			psicologo.setNome(rs.getString("NM_PSICOLOGO"));
+			psicologo.setEmail(rs.getString("DS_EMAIL"));
+			psicologo.setSenha(rs.getString("DS_SENHA"));
+			psicologo.setVlHora(rs.getDouble("VL_HORA"));
+			psicologo.setRanking(rs.getInt("NR_RANKING"));
+			psicologo.setBio(rs.getString("TX_DESC_PERFIL"));
+			psicologo.setTelefone(rs.getString("NR_TELEFONE"));
+			psicologo.setCpf(rs.getString("NR_CPF"));
+			psicologo.setNascimento(rs.getDate("DT_NASCIMENTO"));
+			psicologo.setRating(rs.getDouble("NR_RATING"));
+			psicologo.setDisponibilidade(Disponibilidade.valueOf(rs.getString("DS_DISPONIBILIDADE")));
+			psicologo.setConsultas(rs.getInt("NR_CONSULTAS"));
+			
+		}else {
+			psicologo = null;
+			
+		}
+		
+		rs.close();
+		ps.close();
+		conn.closeConnection();
+		
+		return psicologo;
+		
 	}
 
+	
 	@Override
-	public void update(Integer codigo) throws SQLException {
-		List<PsicologoTO> lista = new ArrayList<>();
-		String sql = "SELECT * FROM T_ZSO_PSICOLOGO";
+	public void update(PsicologoTO psicologo) throws SQLException {
+		conn = ConnectionOracle.getInstance();
+		String sql = "UPDATE T_ZSO_PACIENTE SET NM_PSICOLOGO=?, DS_EMAIL=?, DS_SENHA=?, VL_HORA=?, NR_RANKING=?, TX_DESC_PERFIL=?, NR_TELEFONE=?, NR_CPF=?, DT_NASCIMENTO=?, NR_RATING=?, DS_DISPONIBILIDADE=?, NR_CONSULTAS = " + psicologo.getCodigo();
 		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
+		
+		ps.setInt(1, psicologo.getCodigo());
+		ps.setString(2, psicologo.getNome());
+		ps.setString(3, psicologo.getEmail());
+		ps.setString(4, psicologo.getSenha());
+		ps.setDouble(5, psicologo.getVlHora());
+		ps.setInt(6, psicologo.getRanking());
+		ps.setString(7, psicologo.getBio());
+		ps.setString(8, psicologo.getTelefone());
+		ps.setString(9, psicologo.getCpf());
+		ps.setDate(10, psicologo.getNascimento());
+		ps.setDouble(11, psicologo.getRating());
+		ps.setString(12, psicologo.getDisponibilidade().toString());
+		ps.setInt(13, psicologo.getConsultas());
+		
+		ps.execute();
+		
+		ps.close();
+		conn.closeConnection();
+		return;
 	}
 
 	@Override
 	public void delete(Integer codigo) throws SQLException {
-		List<PsicologoTO> lista = new ArrayList<>();
-		String sql = "SELECT * FROM T_ZSO_PSICOLOGO WHERE CD_";
+		
+		conn = ConnectionOracle.getInstance();
+		String sql = "DELETE FROM T_ZSO_PSICOLOGO WHERE CD_CONSULTA = " + codigo + ";DELETE FROM T_ZSO_AGENDAMENTO WHERE CD_PSICOLOGO = " + codigo + ";DELETE FROM T_ZSO_PSICOLOGO WHERE CD_PSICOLOGO = " + codigo;
 		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
+		
+		ps.execute();
+		ps.close();
+		conn.closeConnection();
+	}
+
+	@Override
+	public void update(Integer codigo) throws SQLException {
+		// TODO Auto-generated method stub
 		
 	}
 

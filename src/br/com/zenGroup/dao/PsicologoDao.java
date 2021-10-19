@@ -20,4 +20,6 @@ public interface PsicologoDao {
 	public void update(Integer codigo) throws SQLException;
 	
 	public void delete(Integer codigo) throws SQLException;
+
+	void update(PsicologoTO psicologo) throws SQLException;
 }
