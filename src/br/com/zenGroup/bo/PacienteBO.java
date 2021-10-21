@@ -17,7 +17,7 @@ public class PacienteBO implements Autenticavel{
 		dao = new PacienteDaoImpl();
 		
 		try {
-			if (dao.select(email, senha) != null) {
+			if (dao.select(email, senha).size() > 0) {
 				valido = true;
 			} else {
 				valido = false;
@@ -79,6 +79,10 @@ public class PacienteBO implements Autenticavel{
 		dao = new PacienteDaoImpl();
 		
 		try {
+			/*
+			 * ADICIONAR DELETE DE CONSULTA E AGENDAMENTO ANTES DO DELETE DE PSICOLOGO
+			 * NECESSITA DE CONSULTA E AGENDAMENTO
+			 * */
 			dao.delete(codigo);
 		} catch (SQLException e) {
 			System.out.println("ERRO AO EXCLUIR PACIENTE...");

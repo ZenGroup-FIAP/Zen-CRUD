@@ -35,7 +35,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		ps.setInt(13, psicologo.getConsultas());
 			
 		ps.close();
-		conn.closeConnection();
 	}
 
 	@Override
@@ -67,7 +66,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		
 		rs.close();
 		ps.close();
-		conn.closeConnection();
 		
 		return lista;
 	}
@@ -102,7 +100,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		
 		rs.close();
 		ps.close();
-		conn.closeConnection();
 		
 		return lista;
 	}
@@ -136,7 +133,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		
 		rs.close();
 		ps.close();
-		conn.closeConnection();
 		
 		return psicologo;
 		
@@ -172,7 +168,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		
 		rs.close();
 		ps.close();
-		conn.closeConnection();
 		
 		return psicologo;
 		
@@ -202,26 +197,17 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		ps.execute();
 		
 		ps.close();
-		conn.closeConnection();
 		return;
 	}
 
 	@Override
 	public void delete(Integer codigo) throws SQLException {
-		
 		conn = ConnectionOracle.getInstance();
-		String sql = "DELETE FROM T_ZSO_PSICOLOGO WHERE CD_CONSULTA = " + codigo + ";DELETE FROM T_ZSO_AGENDAMENTO WHERE CD_PSICOLOGO = " + codigo + ";DELETE FROM T_ZSO_PSICOLOGO WHERE CD_PSICOLOGO = " + codigo;
+		String sql = "DELETE FROM T_ZSO_CONSULTA WHERE CD_PSICOLOGO = " + codigo + ";DELETE FROM T_ZSO_AGENDAMENTO WHERE CD_PSICOLOGO = " + codigo + ";DELETE FROM T_ZSO_PSICOLOGO WHERE CD_PSICOLOGO = " + codigo +";";
 		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
 		
 		ps.execute();
 		ps.close();
-		conn.closeConnection();
-	}
-
-	@Override
-	public void update(Integer codigo) throws SQLException {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
