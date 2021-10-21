@@ -12,7 +12,7 @@ public interface PacienteDao {
 	
 	public PacienteTO select(Integer codigo) throws SQLException;
 	
-	public PacienteTO select(String email, String senha) throws SQLException;
+	public List<PacienteTO> select(String email, String senha) throws SQLException;
 	
 	public void update(PacienteTO paciente) throws SQLException;
 	

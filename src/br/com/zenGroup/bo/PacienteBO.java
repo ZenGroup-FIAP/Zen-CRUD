@@ -17,7 +17,7 @@ public class PacienteBO implements Autenticavel{
 		dao = new PacienteDaoImpl();
 		
 		try {
-			if (dao.select(email, senha) != null) {
+			if (dao.select(email, senha).size() > 0) {
 				valido = true;
 			} else {
 				valido = false;

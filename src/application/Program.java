@@ -16,7 +16,7 @@ public class Program {
 		
 		//System.out.println(bo.listar());
 		//bops.excluir(10);
-		System.out.println(bops.listar());
+		System.out.println(bops.selecionar(1));
 		// Cadastrar paciente
 		
 	}

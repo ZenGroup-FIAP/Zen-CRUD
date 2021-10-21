@@ -35,7 +35,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		ps.setInt(13, psicologo.getConsultas());
 			
 		ps.close();
-		conn.closeConnection();
 	}
 
 	@Override
@@ -67,7 +66,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		
 		rs.close();
 		ps.close();
-		conn.closeConnection();
 		
 		return lista;
 	}
@@ -102,7 +100,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		
 		rs.close();
 		ps.close();
-		conn.closeConnection();
 		
 		return lista;
 	}
@@ -136,7 +133,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		
 		rs.close();
 		ps.close();
-		conn.closeConnection();
 		
 		return psicologo;
 		
@@ -172,7 +168,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		
 		rs.close();
 		ps.close();
-		conn.closeConnection();
 		
 		return psicologo;
 		
@@ -202,7 +197,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		ps.execute();
 		
 		ps.close();
-		conn.closeConnection();
 		return;
 	}
 
@@ -214,7 +208,6 @@ public class PsicologoDaoImpl implements PsicologoDao {
 		
 		ps.execute();
 		ps.close();
-		conn.closeConnection();
 	}
 
 }
