@@ -7,7 +7,6 @@ abstract public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
-	private String bio;
 	private String cpf;
 	private String telefone;
 	private Date nascimento;
@@ -16,13 +15,12 @@ abstract public class Usuario {
 		
 	}
 	
-	public Usuario(Integer codigo, String nome, String email, String senha, String bio, String cpf, String telefone,
+	public Usuario(Integer codigo, String nome, String email, String senha, String cpf, String telefone,
 			Date nascimento) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.bio = bio;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.nascimento = nascimento;
@@ -60,14 +58,6 @@ abstract public class Usuario {
 		this.senha = senha;
 	}
 
-	public String getBio() {
-		return bio;
-	}
-
-	public void setBio(String bio) {
-		this.bio = bio;
-	}
-
 	public String getCpf() {
 		return cpf;
 	}
@@ -94,7 +84,7 @@ abstract public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", bio=" + bio
+		return "Usuario [codigo=" + codigo + ", nome=" + nome + ", email=" + email + ", senha=" + senha
 				+ ", cpf=" + cpf + ", telefone=" + telefone + ", nascimento=" + nascimento + "]";
 	}
 }

@@ -1,4 +1,4 @@
-package br.com.zenGroup.bo;
+package br.com.zenGroup.to;
 
 import java.sql.Date;
 
@@ -11,6 +11,7 @@ public class PsicologoTO extends Usuario {
 	private Double rating;
 	private Disponibilidade disponibilidade;
 	private Integer consultas;
+	private String bio;
 	
 	public PsicologoTO() {
 		super();
@@ -19,12 +20,13 @@ public class PsicologoTO extends Usuario {
 	public PsicologoTO(Integer codigo, String nome, String email, String senha, String bio, String cpf, String telefone,
 			Date nascimento, Double vlHora, Integer ranking, Double rating, Disponibilidade disponibilidade,
 			Integer consultas) {
-		super(codigo, nome, email, senha, bio, cpf, telefone, nascimento);
+		super(codigo, nome, email, senha, cpf, telefone, nascimento);
 		this.vlHora = vlHora;
 		this.ranking = ranking;
 		this.rating = rating;
 		this.disponibilidade = disponibilidade;
 		this.consultas = consultas;
+		this.bio = bio;
 	}
 
 	public Double getVlHora() {
@@ -67,9 +69,17 @@ public class PsicologoTO extends Usuario {
 		this.consultas = consultas;
 	}
 
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
 	@Override
 	public String toString() {
 		return "PsicologoTO [vlHora=" + vlHora + ", ranking=" + ranking + ", rating=" + rating + ", disponibilidade="
-				+ disponibilidade + ", consultas=" + consultas + "]";
+				+ disponibilidade + ", consultas=" + consultas + ", bio=" + bio + "]";
 	}
 }
